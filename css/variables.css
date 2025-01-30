@@ -1,0 +1,101 @@
+:root {
+    --clr-neutral-100: hsl(0, 0%, 100%);
+    --clr-neutral-200: hsl(0, 0%, 87%);
+    --clr-neutral-300: hsl(0, 0%, 57%);
+    --clr-neutral-400: hsl(0, 0%, 27%);
+    --clr-neutral-800: hsl(0, 0%, 17%);
+    --clr-neutral-900: hsl(0, 0%, 12%);
+
+    --clr-green-100: hsl(169, 11%, 93%);
+    --clr-green-200: hsl(169, 51%, 58%);
+    --clr-green-400: hsl(169, 86%, 28%);
+    --clr-green-800: hsl(169, 86%, 12%);
+    --clr-green-900: hsl(169, 80%, 12%);
+
+    --clr-robust: hsl(221, 63%, 32%);
+    --clr-green: hsl(110, 63%, 32%);
+    --clr-flower: hsl(2, 92%, 33%);
+    --clr-colorful: hsl(303, 55%, 47%);
+    --clr-sunloving: hsl(27, 88%, 33%);
+    --clr-air: hsl(180, 84%, 27%);
+    --clr-decorative: hsl(278, 79%, 40%);
+    --clr-edible: hsl(68, 61%, 30%);
+    --clr-easy: hsl(224, 86%, 58%);
+    --clr-fragrant: hsl(327, 51%, 47%);
+    --clr-fast: hsl(218, 11%, 34%);
+
+    --border-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+    --font-base: 'Open Sans', 'Segoe UI', Tahoma, sans-serif;
+
+    --fw-400: 400;
+    --fw-500: 500;
+    --fw-600: 600;
+    --fw-700: 700;
+    --fw-800: 800;
+    --fw-900: 900;
+
+    --fs-100: var(--step--2);
+    --fs-200: var(--step--1);
+    --fs-400: var(--step-0);
+    --fs-500: var(--step-1);
+    --fs-600: var(--step-2);
+    --fs-700: var(--step-3);
+    --fs-800: var(--step-4);
+    --fs-900: var(--step-5);
+
+    --clr-accent: var(--clr-green-400);
+    --clr-accent-light-1: var(--clr-green-100);
+
+    --clr-primary-light-1: var(--clr-neutral-100);
+    --clr-primary-light-2: var(--clr-neutral-200);
+    --clr-primary-light-3: var(--clr-neutral-300);
+    --clr-primary: var(--clr-neutral-400);
+    --clr-primary-dark: var(--clr-neutral-800);
+
+    --fw-regular: var(--fw-400);
+    --fw-medium: var(--fw-500);
+    --fw-semi-bold: var(--fw-600);
+    --fw-bold: var(--fw-700);
+    --fw-x-bold: var(--fw-900);
+
+    /* Custom edit */
+    --padding-inline: var(--space-m);
+    --content-max-width: 100%;
+    --gap: var(--space-s);
+    --btn-border-radius: var(--space-2xl);
+    --border-thin: calc(0.0625rem * 1);
+    --transition-ms: 200ms;
+}
+
+/* @link https://utopia.fyi/space/calculator?c=320,16,1.2,1240,18,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
+:root {
+    --space-3xs: clamp(0.1875rem, 0.1658rem + 0.1087vw, 0.25rem);
+    --space-2xs: clamp(0.375rem, 0.3315rem + 0.2174vw, 0.5rem);
+    --space-xs: clamp(0.5625rem, 0.4973rem + 0.3261vw, 0.75rem);
+    --space-s: clamp(0.75rem, 0.663rem + 0.4348vw, 1rem);
+    --space-m: clamp(1.125rem, 0.9946rem + 0.6522vw, 1.5rem);
+    --space-l: clamp(1.5rem, 1.3261rem + 0.8696vw, 2rem);
+    --space-xl: clamp(2.25rem, 1.9891rem + 1.3043vw, 3rem);
+    --space-2xl: clamp(3rem, 2.6522rem + 1.7391vw, 4rem);
+    --space-3xl: clamp(4.5rem, 3.9783rem + 2.6087vw, 6rem);
+
+    /* @link https://utopia.fyi/clamp/calculator?a=320,1240,124—188 */
+
+    --fluid-124-188: clamp(7.75rem, 6.3587rem + 6.9565vw, 11.75rem);
+    --fluid-32-40: clamp(2rem, 1.8261rem + 0.8696vw, 2.5rem);
+    --fluid-30-36: clamp(1.875rem, 1.7446rem + 0.6522vw, 2.25rem);
+    --fluid-16-20: clamp(1rem, 0.913rem + 0.4348vw, 1.25rem);
+
+    /* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1240,18,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
+    --step--2: clamp(0.5208rem, 0.4794rem + 0.2072vw, 0.64rem);
+    --step--1: clamp(0.625rem, 0.5641rem + 0.3043vw, 0.8rem);
+    --step-0: clamp(0.75rem, 0.663rem + 0.4348vw, 1rem);
+    --step-1: clamp(0.9rem, 0.7783rem + 0.6087vw, 1.25rem);
+    --step-2: clamp(1.08rem, 0.9122rem + 0.8391vw, 1.5625rem);
+    --step-3: clamp(1.296rem, 1.0674rem + 1.1428vw, 1.9531rem);
+    --step-4: clamp(1.5552rem, 1.247rem + 1.5412vw, 2.4414rem);
+    --step-5: clamp(1.8662rem, 1.4539rem + 2.0618vw, 3.0518rem);
+}

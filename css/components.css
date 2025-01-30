@@ -1,0 +1,131 @@
+main {
+    background-color: red;
+}
+#searchArtForm {
+    background-color: pink;
+    z-index: 10;
+}
+#artDialog {
+    margin: auto auto; /* Simple as this */
+    transition: opacity 2.3s ease, transform 2.3s ease;
+
+    .wrapper {
+        background-color: red;
+        width: 30rem;
+        height: 10rem;
+    }
+    z-index: 10;
+}
+dialog::backdrop {
+    background-color: rgba(111, 9, 9, 0.634);
+    backdrop-filter: blur(20px);
+}
+dialog[open]::backdrop {
+    background: rgba(0, 0, 0, 0.5); /* Fade in backdrop */
+}
+#listArts {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    > * {
+        grid-column: span 12;
+        background-color: yellow;
+    }
+    background-color: green;
+    ul {
+        display: grid;
+        grid-template-columns: subgrid;
+        list-style: none;
+        gap: 1rem;
+        li {
+            position: relative;
+            background-color: pink;
+            grid-column: span 12;
+            img {
+                width: 100%;
+                aspect-ratio: 1;
+                object-fit: contain;
+                background-color: white;
+            }
+            .like-button {
+                position: absolute;
+                right: 0;
+                display: block;
+                /* width:20px;
+        height: 20px; */
+                background-color: green;
+                /* &:hover {
+          background-color: green;
+        } */
+                &[aria-pressed='false'] {
+                    background-color: red;
+                }
+            }
+            &:hover {
+                border: 1px red solid;
+            }
+        }
+    }
+}
+
+/* @media (min-width: 800px) {
+    #listArts {
+        ul {
+            li {
+                background-color: green;
+                grid-column: span 4;
+            }
+        }
+    }
+} */
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: green;
+}
+
+header {
+    top: 0rem;
+    position: sticky;
+    padding: var(--space-xs) 0px;
+    z-index: 1;
+    background-color: rgb(0, 255, 170);
+    width: 100%;
+}
+
+.app-wrapper {
+    position: relative;
+    overflow: hidden;
+    overflow-y: scroll;
+    border-radius: 2vw;
+    box-shadow: 0px 10px 100px rgba(0, 0, 0, 0.435);
+}
+
+body[data-device='desktop'] {
+    .app-wrapper {
+        aspect-ratio: 16/9;
+        width: 90%;
+        max-width: 1400px;
+        background-color: rgb(128, 0, 0);
+    }
+    #listArts {
+        ul {
+            li {
+                grid-column: span 4;
+            }
+        }
+    }
+}
+
+body[data-device='phone'] {
+    background-color: rgb(0, 255, 17);
+    .app-wrapper {
+        aspect-ratio: 4/9;
+        width: 90%;
+        max-width: 400px;
+        background-color: rgb(255, 234, 5);
+    }
+}

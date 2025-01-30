@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link href="/css/style.css" rel="stylesheet" />
+        <script src="app.js" type="module" defer></script>
+    </head>
+    <body>
+        <dialog id="artDialog">
+            <div class="wrapper">
+                <p>Greetings, one and all!</p>
+                <form method="dialog">
+                    <button>OK</button>
+                </form>
+            </div>
+        </dialog>
+        <span id="toggle-viewport">Toggle viewport</span>
+        <div class="app-wrapper">
+            <header class="content-grid">
+                <h1>Art CRUD App</h1>
+                <!-- Form -->
+                <form id="searchArtForm">
+                    <label>
+                        <input type="text" placeholder="Search terms" id="inputSearch" />
+                    </label>
+                    <button id="submitArtSearch">Hit me</button>
+                </form>
+            </header>
+            <main class="content-grid">
+                <!-- List our art-->
+                <section id="listArts"></section>
+            </main>
+        </div>
+    </body>
+</html>
