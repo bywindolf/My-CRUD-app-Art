@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
         <link href="/css/style.css" rel="stylesheet" />
-        <script src="app.js" type="module" defer></script>
+        <script src="app.js" type="module"></script>
     </head>
     <body>
         <dialog id="artDialog">
@@ -25,7 +25,10 @@
                     <label>
                         <input type="text" placeholder="Search terms" id="inputSearch" />
                     </label>
-                    <button id="submitArtSearch">Hit me</button>
+                    <button id="submitArtSearch">Search art</button>
+                    <div class="action-bar">
+                        <button class="" id="fanPageBtn">My stars</button>
+                    </div>
                 </form>
             </header>
             <main class="content-grid">

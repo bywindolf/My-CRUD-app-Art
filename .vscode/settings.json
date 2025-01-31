@@ -1,9 +1,15 @@
 {
   "editor.formatOnSave": true,
   "scss.lint.unknownAtRules": "ignore",
+  "[markdown]": {
+     "files.autoSave": "off",
+  },
   "[javascript]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+      "editor.formatOnSave": true,
   },
   "[html]": {
     "editor.formatOnSave": true,

@@ -9,14 +9,15 @@ const listArtElement = listArtContainerEL;
 const searchArtFormEl = document.getElementById('searchArtForm'); // Search from
 const toggleViewportEl = document.getElementById('toggle-viewport'); // Toggle viewport
 
-let valueCheck = localStorage.getItem('data-device') || 'desktop';
+// Dialogen
+const dialog = document.getElementById('artDialog');
 
 export {
     bodyEl,
     listArtContainerEL,
     searchArtFormEl,
     toggleViewportEl,
-    valueCheck,
     API_BASE_URL,
     DEFAULT_SEARCH,
+    dialog,
 };

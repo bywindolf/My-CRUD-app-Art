@@ -1,52 +1,66 @@
-import { searchArtFormEl, toggleViewportEl, bodyEl } from './constants.js';
-import { fetchArts, displayArts } from './api.js';
-
-// const artItem = document.getElementById();
+import { bodyEl, searchArtFormEl, toggleViewportEl, listArtContainerEL } from './constants.js'; // Elements
+import { fetchArts, displayArts } from './api.js'; // Functions
 
 export const setupEventListerners = () => {
-    //Öppna dialog på klick av vår app-wrapper för nu
+    // Create an UL for our LI (ARTs)
+    const ulEl = document.createElement('ul');
 
-    // Vår sök
+    let valueCheck = localStorage.getItem('data-device') || 'desktop';
+    localStorage.setItem('data-device', valueCheck);
+    bodyEl.setAttribute('data-device', valueCheck);
+
+    // Our SEARCH
     searchArtFormEl.addEventListener('submit', (e) => {
         e.preventDefault();
-        console.log('asasg');
-
+        // Look for our value from search input
         const searchInputEl = document.getElementById('inputSearch');
-        console.log(searchInputEl.value);
-        let searchWord = searchInputEl.value.trim();
-        console.log(searchWord);
-        fetchArts(searchWord).then(displayArts); // Fetch and display default arts
+        let query = searchInputEl.value.trim();
+        // Fetch ARTs
+        fetchArts(query).then(displayArts); // Fetch and display default arts
     });
 
-    // Vår toggle
+    // Our Viewort TOGGLE
     toggleViewportEl.addEventListener('click', (e) => {
         e.preventDefault();
 
-        // Get the current value from localStorage
-        let valueCheck = localStorage.getItem('data-device') || 'desktop';
-        localStorage.setItem('data-device', valueCheck);
-        bodyEl.setAttribute('data-device', valueCheck);
-
-        console.log('Current value in LS:', valueCheck);
-        // If no value exists in localStorage, set it to 'desktop'
-
-        if (!valueCheck) {
-            console.log('No value found, setting to "desktop"');
-            localStorage.setItem('data-device', 'desktop');
-            valueCheck = 'desktop'; // Update the variable after setting
-        }
+        // Get current TOGGLE-value. If none set to 'Desktop'
+        let toggleValueCheck = localStorage.getItem('data-device') || 'desktop';
 
         // Toggle between 'phone' and 'desktop' values
-        const newValue = valueCheck === 'phone' ? 'desktop' : 'phone';
-        console.log('Toggling to:', newValue);
+        const newToggleValue = toggleValueCheck === 'phone' ? 'desktop' : 'phone';
+
+        // Ternary operator
         toggleViewportEl.textContent =
-            valueCheck === 'phone' ? 'Switch to Desktop' : 'Switch to Phone';
-        bodyEl.setAttribute('data-device', newValue);
+            newToggleValue === 'phone' ? 'Switch to Desktop' : 'Switch to Phone';
 
         // Save the toggled value in localStorage
-        localStorage.setItem('data-device', newValue);
+        localStorage.setItem('data-device', newToggleValue);
 
-        // Log the final state for verification
-        console.log('New value in LS:', newValue);
+        // Update 'data-device' with new value
+        bodyEl.setAttribute('data-device', newToggleValue);
+    });
+
+    //LOgic for like
+
+    // Not optimal, listen for "bubblers" on parent instead i guess
+    const likeArtButtons = document.querySelectorAll('.like-button');
+    likeArtButtons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+            console.log('hejej');
+            event.preventDefault();
+            const clickedButton = event.target;
+            const isPressed = clickedButton.getAttribute('aria-pressed') === 'true';
+            clickedButton.setAttribute('aria-pressed', !isPressed);
+            console.log(`Button ${clickedButton.id} aria-pressed: ${!isPressed}`);
+        });
+    });
+
+    //Listen for fav page
+
+    const fanPageButtonEl = document.getElementById('fanPageBtn');
+    fanPageButtonEl.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('button clicked');
+        listArtContainerEL.innerHTML = 'test';
     });
 };
