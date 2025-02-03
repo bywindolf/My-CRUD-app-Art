@@ -1,49 +1,37 @@
-// IMPORT
-import { API_BASE_URL, listArtContainerEL, dialog } from './constants.js';
+import { listArtContainerEL, dialog } from './constants.js';
+import { loginDialog, artCard } from './components.js';
+import { fetchArtDetails } from './fetch.js';
 
-// FETCH Arts
-export const fetchArts = async (query) => {
-    try {
-        console.log('inne i try');
-        const response = await fetch(`${API_BASE_URL}/search?q=${query}`);
-        if (!response.ok) {
-            throw new Error(`${response.status}`);
-        }
-        const data = await response.json();
-        console.log(data.data); // Its not constructed to give RESULTS. It gives an object with array of objects!
-        // Vi har ni alla id i data.objectisIDs arrayen
-        // Nu vill vi loopa igenom all data (nummer aka id)
-        const artworks = data.data;
-
-        // Extracting only the `id` values
-        const artworkIds = artworks.map((artwork) => artwork.id);
-        console.log(artworkIds);
-        // displayArts(artworkIds);
-        return artworkIds;
-    } catch (error) {
-        console.error(error);
-    }
+// Function to get liked items from localStorage
+export const getLikedItems = () => {
+    const likedItems = localStorage.getItem('likedItems');
+    return likedItems ? JSON.parse(likedItems) : [];
 };
-// FETCH ArtDetails
-export const fetchArtDetails = async (artID) => {
-    console.log('fetch art id ->', artID);
-    const ART_API_URL = `${API_BASE_URL}/${artID}`; // Sunflowers for now
-    try {
-        console.log('inne i fetchArt');
-        const response = await fetch(ART_API_URL);
-        if (!response.ok) {
-            throw new Error(`${response.status}`);
-        }
-        const data = await response.json();
-        const wantedData = data.data; // Object...
-        console.log('artistDetails', wantedData); // Lists all art to search term, we now want to fetch data about specific art.
 
-        return wantedData;
-    } catch (error) {
-        console.error('Error fetching art details:', error);
-        return null; // Return null in case of an error
-    }
+// Function to save liked items to localStorage
+export const saveLikedItems = (likedItems) => {
+    localStorage.setItem('likedItems', JSON.stringify(likedItems));
 };
+
+// Function to update the aria-pressed attribute based on the like status
+export const updateLikeButtonState = (button, isLiked) => {
+    button.setAttribute('aria-pressed', isLiked);
+};
+
+// CHECK AUTH, is user logged in?
+export function checkAuth() {
+    // Return true/false depending if value exist or not.
+    const isAuthenticated = Boolean(localStorage.getItem('user-authenticated'));
+    // If FALSE
+    if (!isAuthenticated) {
+        // Redirect to out AuthModal
+        loginDialog('Logga in', 'Dina favoriter är bakom inlogg typ.');
+        return false;
+    }
+    // If TRUE
+    return true;
+}
+
 // Display ARTs
 export const displayArts = async (artIDs) => {
     console.log('We are in -> displasyArts');
@@ -64,17 +52,10 @@ export const displayArts = async (artIDs) => {
 
         // IF artDetails
         if (artDetails) {
-            const artItem = document.createElement('li');
+            const artItem = artCard(artDetails.title, artDetails.id, artDetails.image_id);
             artItem.classList.add('art-item');
             artItem.setAttribute('data-id', `${artDetails.id}`); // Set ID for each <li>-item
-            artItem.innerHTML = `
-                <figure>
-                <button aria-pressed="false" class="like-button" id="${artDetails.id}">Like</button>
-                <img src="${artDetails.thumbnail.lqip}" />
-                </figure>
-                <h1>${artDetails.title}</h1>
-                <p>${artDetails.id}</p>
-            `;
+
             ulEl.appendChild(artItem); // APPEND artItem
         }
         //ELSE
@@ -91,22 +72,6 @@ export const displayArts = async (artIDs) => {
     //APPEND ARTs to <ul>
     listArtContainerEL.appendChild(ulEl);
 
-    // Function to get liked items from localStorage
-    const getLikedItems = () => {
-        const likedItems = localStorage.getItem('likedItems');
-        return likedItems ? JSON.parse(likedItems) : [];
-    };
-
-    // Function to save liked items to localStorage
-    const saveLikedItems = (likedItems) => {
-        localStorage.setItem('likedItems', JSON.stringify(likedItems));
-    };
-
-    // Function to update the aria-pressed attribute based on the like status
-    const updateLikeButtonState = (button, isLiked) => {
-        button.setAttribute('aria-pressed', isLiked);
-    };
-
     // Attach ONE event listener to the parent UL for delegation
     ulEl.addEventListener('click', async (e) => {
         // Handling click on .art-item (view art details)
@@ -119,10 +84,15 @@ export const displayArts = async (artIDs) => {
                 const artDetails = await fetchArtDetails(artID);
                 console.log('Art Details:', artDetails);
                 dialog.innerHTML = `
-                <h4>${artDetails.title}</h4>
-                <img src="${artDetails.thumbnail.lqip}">
+                <div class="wrapper">
                 <img src="https://www.artic.edu/iiif/2/${artDetails.image_id}/full/843,/0/default.jpg">
-            `;
+                <div class="art-details">
+                <h4>${artDetails.title}</h4>
+                <h4>${artDetails.medium_display}</h4>
+
+                </div>
+                </div>
+                `;
                 dialog.showModal();
             } catch (error) {
                 console.error('Failed to fetch data:', error);

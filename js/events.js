@@ -1,6 +1,6 @@
 import { bodyEl, searchArtFormEl, toggleViewportEl, listArtContainerEL } from './constants.js'; // Elements
-import { fetchArts, displayArts } from './api.js'; // Functions
-
+import { fetchArts } from './fetch.js'; // Functions
+import { checkAuth, displayArts } from './functions.js';
 export const setupEventListerners = () => {
     // Create an UL for our LI (ARTs)
     const ulEl = document.createElement('ul');
@@ -56,11 +56,15 @@ export const setupEventListerners = () => {
     });
 
     //Listen for fav page
-
     const fanPageButtonEl = document.getElementById('fanPageBtn');
     fanPageButtonEl.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log('button clicked');
-        listArtContainerEL.innerHTML = 'test';
+
+        if (!checkAuth()) {
+            return;
+        } else {
+            console.log('Welcome');
+            displayArts(getLikedItems());
+        }
     });
 };

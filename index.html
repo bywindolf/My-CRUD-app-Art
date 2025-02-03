@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Art CRUD App</title>
         <link href="/css/style.css" rel="stylesheet" />
         <script src="app.js" type="module"></script>
     </head>
@@ -16,20 +16,22 @@
                 </form>
             </div>
         </dialog>
-        <span id="toggle-viewport">Toggle viewport</span>
+        <span id="toggle-viewport" class="btn">Toggle viewport</span>
         <div class="app-wrapper">
             <header class="content-grid">
-                <h1>Art CRUD App</h1>
-                <!-- Form -->
-                <form id="searchArtForm">
-                    <label>
-                        <input type="text" placeholder="Search terms" id="inputSearch" />
-                    </label>
-                    <button id="submitArtSearch">Search art</button>
-                    <div class="action-bar">
-                        <button class="" id="fanPageBtn">My stars</button>
+                <div class="wrapper grid-12">
+                    <h1 class="brand-name"><a href="/">Art CRUD App</a></h1>
+                    <!-- Form -->
+                    <form id="searchArtForm">
+                        <label>
+                            <input type="text" placeholder="Search terms" id="inputSearch" />
+                        </label>
+                        <button id="submitArtSearch" class="btn submit">Search art</button>
+                    </form>
+                    <div class="extras">
+                        <button class="btn" id="fanPageBtn">My stars</button>
                     </div>
-                </form>
+                </div>
             </header>
             <main class="content-grid">
                 <!-- List our art-->

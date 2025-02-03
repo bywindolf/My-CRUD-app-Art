@@ -4,8 +4,6 @@ let DEFAULT_SEARCH = 'cats';
 
 const bodyEl = document.body; // Body Element
 const listArtContainerEL = document.getElementById('listArts'); // Container for Arts
-const listArtElement = listArtContainerEL;
-
 const searchArtFormEl = document.getElementById('searchArtForm'); // Search from
 const toggleViewportEl = document.getElementById('toggle-viewport'); // Toggle viewport
 

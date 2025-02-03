@@ -22,3 +22,12 @@ body {
     display: grid;
     grid-template-columns: inherit;
 }
+.grid-12 {
+    display: grid;
+    align-items: center;
+    width: 100%;
+    grid-template-columns: repeat(12, 1fr);
+    > * {
+        grid-column: span 12;
+    }
+}
