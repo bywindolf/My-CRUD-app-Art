@@ -1,4 +1,4 @@
-import { API_BASE_URL, listArtContainerEL, dialog } from './constants.js';
+import { API_BASE_URL } from './constants.js';
 
 // FETCH Arts
 export const fetchArts = async (query) => {

@@ -1,7 +1,9 @@
-import { bodyEl, searchArtFormEl, toggleViewportEl, listArtContainerEL } from './constants.js'; // Elements
+import { bodyEl, searchArtFormEl, toggleViewportEl } from './constants.js'; // Elements
 import { fetchArts } from './fetch.js'; // Functions
-import { checkAuth, displayArts } from './functions.js';
-export const setupEventListerners = () => {
+import { checkAuth, displayArts, getLikedItems } from './functions.js';
+
+// Our function for handeling our events listners
+export const eventListerners = () => {
     // Create an UL for our LI (ARTs)
     const ulEl = document.createElement('ul');
 
@@ -19,7 +21,7 @@ export const setupEventListerners = () => {
         fetchArts(query).then(displayArts); // Fetch and display default arts
     });
 
-    // Our Viewort TOGGLE
+    // Our Viewport TOGGLE
     toggleViewportEl.addEventListener('click', (e) => {
         e.preventDefault();
 
@@ -40,13 +42,12 @@ export const setupEventListerners = () => {
         bodyEl.setAttribute('data-device', newToggleValue);
     });
 
-    //LOgic for like
+    //Logic for like
 
     // Not optimal, listen for "bubblers" on parent instead i guess
     const likeArtButtons = document.querySelectorAll('.like-button');
     likeArtButtons.forEach((button) => {
         button.addEventListener('click', (event) => {
-            console.log('hejej');
             event.preventDefault();
             const clickedButton = event.target;
             const isPressed = clickedButton.getAttribute('aria-pressed') === 'true';
